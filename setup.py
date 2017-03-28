@@ -8,7 +8,7 @@ setup(
     version="0.1.2",
     description="A simple .gexf parser/writer for python",
     license="MIT",
-    url="https://github.com/demux/simplegexf",
+    url="https://github.com/trbode/simplegexf",
     install_requires=['xmltodict==0.9.2'],
     long_description=open("README.md").read(),
     keywords="simplegexf gephi gexf",
