@@ -5,7 +5,7 @@ from setuptools import setup
 
 setup(
     name="simplegexf",
-    version="0.1.2",
+    version="0.1.3",
     description="A simple .gexf parser/writer for python",
     license="MIT",
     url="https://github.com/trbode/simplegexf",
