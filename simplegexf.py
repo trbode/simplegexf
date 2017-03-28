@@ -1,4 +1,5 @@
 import os
+import sys
 from collections import OrderedDict, MutableMapping, MutableSequence
 from operator import itemgetter, attrgetter
 from copy import deepcopy
@@ -60,13 +61,28 @@ class BaseElement:
 
 
 class Gexf(BaseElement):
-    def __init__(self, path):
-        self.path = os.path.realpath(path)
+    def __init__(self, path_or_generator=None):
+        print("path_or_generator is type: {0}".format(type(path_or_generator)))
 
-        try:
-            xml = open(self.path, 'r', encoding='utf-8').read()
-        except IOError:
-            xml = TEMPLATE
+        if isinstance(path_or_generator, str):
+            self.path = os.path.realpath(path_or_generator)
+
+            try:
+                if sys.version >= (3, 5):
+                    xml = open(self.path, 'r', encoding='utf-8').read()
+                else:
+                    xml = open(self.path, 'r').read().encode("utf-8")
+            except IOError:
+                xml = TEMPLATE
+        else:
+            body = []
+            try:
+                for b in path_or_generator:
+                    body.append(b)
+
+                xml = "".join(body)
+            except IOError:
+                xml = TEMPLATE
 
         self.tree = xmltodict.parse(xml)
 
